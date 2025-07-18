@@ -3,21 +3,7 @@ name: Build and Deploy ASP.NET to IIS
 on:
   push:
     branches:
-      - master
-  workflow_call:
-    inputs:
-      server:
-        required: true
-        type: string
-      username:
-        required: true
-        type: string
-      password:
-        required: true
-        type: string
-      local-dir:
-        required: true
-        type: string
+      - master  
 jobs:
   build-and-deploy:
     runs-on: windows-latest
@@ -41,7 +27,7 @@ jobs:
         run: dotnet publish -c Release -o publish
 
       - name: Deploy via FTP (to IIS)
-        uses: zaheerdalmia/testApp1/.github/workflows/deploy.yml@main
+        uses: zaheerdalmia/testApp1/actions@v1.0.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
