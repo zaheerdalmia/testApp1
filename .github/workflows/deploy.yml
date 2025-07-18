@@ -3,10 +3,11 @@ name: Build and Deploy ASP.NET to IIS
 on:
   push:
     branches:
-      - master  
+      - master
+
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+     runs-on: windows-2022
 
     steps:
       - name: Checkout code
@@ -15,7 +16,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.x'  # Adjust version accordingly
+          dotnet-version: '6.0.x'
 
       - name: Restore dependencies
         run: dotnet restore
@@ -27,7 +28,7 @@ jobs:
         run: dotnet publish -c Release -o publish
 
       - name: Deploy via FTP (to IIS)
-        uses: zaheerdalmia/testApp1/actions@v1.0.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
