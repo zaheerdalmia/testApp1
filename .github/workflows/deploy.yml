@@ -28,7 +28,7 @@ jobs:
         run: dotnet publish -c Release -o publish
 
       - name: Deploy via FTP (to IIS)
-        uses: zaheerdalmia/actionsn@v4.3.4
+        uses: zaheerdalmia/testApp1/.github/workflows/deploy.yml@main
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
